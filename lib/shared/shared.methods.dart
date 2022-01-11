@@ -1,22 +1,20 @@
 part of 'shared.dart';
 
-final picker = ImagePicker();
-
-pickImageGallery() async {
-  var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-  return image;
+Future<File> getImage() async {
+  final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  imageFile = File(image.path);
+  return imageFile;
 }
 
-
-uploadImage(File image) async {
-  FirebaseStorage storage = FirebaseStorage.instance;
-  String fileName = basename(image.path);
-
-  Reference ref = storage.ref().child('Profile Picture/$fileName');
-  UploadTask uploadTask = ref.putFile(image);
-  uploadTask.then((res) {
-    res.ref.getDownloadURL();
-  });
+Future<String> uploadImage(File image) async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    String fileName = basename(image.path);
+    Reference ref = storage.ref().child('Profile Picture/$fileName');
+    UploadTask uploadTask = ref.putFile(image);
+    uploadTask.then((res) {
+      res.ref.getDownloadURL();
+    });
+    return null;
 }
 
 Widget generateDashedDivider(double width) {

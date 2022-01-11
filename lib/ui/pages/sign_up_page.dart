@@ -93,7 +93,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               if (widget.registrationData.profilePicture ==
                                   null) {
                                 widget.registrationData.profilePicture =
-                                    await pickImageGallery();
+                                    await getImage();
                               } else {
                                 widget.registrationData.profilePicture = null;
                               }

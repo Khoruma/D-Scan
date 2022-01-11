@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           uploadImage(imageFileToUpload).then((downloadURL) {
                             imageFileToUpload = null;
                             context
-                                .read<UserBloc>()
+                                .watch<UserBloc>()
                                 .add(UpdateData(profilePicture: downloadURL));
                           });
                         }

@@ -77,7 +77,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               child: GestureDetector(
                                 onTap: () async {
                                   if (profilePath == "") {
-                                    profileImageFile = await pickImageGallery();
+                                    profileImageFile = await getImage();
 
                                     if (profileImageFile != null) {
                                       profilePath =

@@ -60,7 +60,7 @@ class SplashPage extends StatelessWidget {
                   },
                   child: Text(
                     " Masuk",
-                    style: brownTextFont,
+                    style: purpleTextFont,
                   ),
                 )
               ],

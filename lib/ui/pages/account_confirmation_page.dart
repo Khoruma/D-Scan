@@ -11,7 +11,7 @@ class AccountConfirmationPage extends StatefulWidget {
 }
 
 class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
-  bool isSigningUp = false;
+  bool isSigninggnUp = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,7 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
         context
             .read<PageBloc>()
             .add(GoToRegistrationPage(widget.registrationData));
+
         return;
       },
       child: Scaffold(
@@ -31,7 +32,7 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
               Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 20, bottom: 90),
+                    margin: EdgeInsets.only(bottom: 90, top: 20),
                     height: 56,
                     child: Stack(
                       children: <Widget>[
@@ -45,12 +46,10 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
                           ),
                         ),
                         Center(
-                          child: Text(
-                            "Confirm\nNew Account",
-                            style: blackTextFont.copyWith(fontSize: 20),
-                            textAlign: TextAlign.center,
-                          ),
-                        )
+                          child: Text("Konfirmasi Akun\nBaru",
+                              style: blackTextFont.copyWith(fontSize: 20),
+                              textAlign: TextAlign.center),
+                        ),
                       ],
                     ),
                   ),
@@ -69,9 +68,11 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
                             fit: BoxFit.cover)),
                   ),
                   Text(
-                    "Welcome",
+                    "Selamat Datang",
                     style: blackTextFont.copyWith(
-                        fontSize: 16, fontWeight: FontWeight.w300),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                   Text(
                     "${widget.registrationData.name}",
@@ -81,8 +82,8 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
                   SizedBox(
                     height: 110,
                   ),
-                  (isSigningUp)
-                      ? SpinKitFadingCircle(
+                  (isSigninggnUp)
+                      ? SpinKitCircle(
                           color: Color(0xFF3E9D9D),
                           size: 45,
                         )
@@ -94,34 +95,34 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8)),
                               child: Text(
-                                "Create My Account",
+                                "Buat Akun Saya",
                                 style: whiteTextFont.copyWith(fontSize: 16),
                               ),
                               onPressed: () async {
                                 setState(() {
-                                  isSigningUp = true;
+                                  isSigninggnUp = true;
                                 });
 
                                 imageFileToUpload =
                                     widget.registrationData.profilePicture;
 
                                 SignInSignUpResult result =
-                                    await AuthServices.signUp(
+                                    await AuthServices.signUP(
                                         widget.registrationData.email,
                                         widget.registrationData.password,
                                         widget.registrationData.name);
 
                                 if (result.user == null) {
                                   setState(() {
-                                    isSigningUp = false;
+                                    isSigninggnUp = false;
                                   });
 
                                   Flushbar(
-                                    duration: Duration(milliseconds: 1500),
-                                    flushbarPosition: FlushbarPosition.TOP,
-                                    backgroundColor: Color(0xFFFF5C83),
-                                    message: result.message,
-                                  )..show(context);
+                                      duration: Duration(milliseconds: 1500),
+                                      flushbarPosition: FlushbarPosition.TOP,
+                                      backgroundColor: Color(0xFFFF5C83),
+                                      message: result.messege)
+                                    ..show(context);
                                 }
                               }))
                 ],

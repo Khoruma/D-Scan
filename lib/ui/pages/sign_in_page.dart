@@ -17,7 +17,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     context
         .read<ThemeBloc>()
-        .add(ChangeTheme(ThemeData().copyWith(primaryColor: accentColor2)));
+        .add(ChangeTheme(ThemeData().copyWith(primaryColor: accentColor1)));
 
     return WillPopScope(
       onWillPop: () {
@@ -28,75 +28,75 @@ class _SignInPageState extends State<SignInPage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-          child: ListView(
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 30,
-                  ),
-                  SizedBox(
-                    height: 70,
-                    child: Image.asset("assets/logo.png"),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 70, bottom: 40),
-                    child: Text(
-                      "Welcome Back,\nExplorer!",
-                      style: blackTextFont.copyWith(fontSize: 20),
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+            child: ListView(
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 30,
                     ),
-                  ),
-                  TextField(
-                    onChanged: (text) {
-                      setState(() {
-                        isEmailValid = EmailValidator.validate(text);
-                      });
-                    },
-                    controller: emailController,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        labelText: "Email Address",
-                        hintText: "Email Address"),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  TextField(
-                    onChanged: (text) {
-                      setState(() {
-                        isPasswordValid = text.length >= 6;
-                      });
-                    },
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        labelText: "Password",
-                        hintText: "Password"),
-                  ),
-                  SizedBox(
-                    height: 6,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        "Forgot Password? ",
-                        style: greyTextFont.copyWith(
-                            fontSize: 12, fontWeight: FontWeight.w400),
+                    SizedBox(
+                      height: 70,
+                      child: Image.asset("assets/logo.png"),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 70, bottom: 40),
+                      child: Text(
+                        "Selamat Datang\nKembali !",
+                        style: blackTextFont.copyWith(fontSize: 20),
                       ),
-                      Text(
-                        "Get Now",
-                        style: purpleTextFont.copyWith(fontSize: 12),
-                      )
-                    ],
-                  ),
+                    ),
+                    TextField(
+                      onChanged: (text) {
+                        setState(() {
+                          isEmailValid = EmailValidator.validate(text);
+                        });
+                      },
+                      controller: emailController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          labelText: "Email Address",
+                          hintText: "Email Address"),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      onChanged: (text) {
+                        setState(() {
+                          isPasswordValid = text.length >= 6;
+                        });
+                      },
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          labelText: "Password",
+                          hintText: "Password"),
+                    ),
+                    SizedBox(
+                      height: 6,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "Lupa Password?",
+                          style: greyTextFont.copyWith(
+                              fontSize: 12, fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          " Dapatkan Sekarang",
+                          style: purpleTextFont.copyWith(fontSize: 12),
+                        ),
+                      ],
+                    ),
                     Center(
                       child: Container(
                         width: 250,
@@ -136,31 +136,35 @@ class _SignInPageState extends State<SignInPage> {
                                             flushbarPosition:
                                                 FlushbarPosition.TOP,
                                             backgroundColor: Color(0xFFFF5C83),
-                                            message: result.message,
+                                            message: result.messege,
                                           )..show(context);
                                         }
                                       }
                                     : null),
                       ),
                     ),
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        "Start Fresh Now? ",
-                        style:
-                            greyTextFont.copyWith(fontWeight: FontWeight.w400),
-                      ),
-                      Text(
-                        "Sign Up",
-                        style: purpleTextFont,
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "Belum Punya Akun?",
+                          style: greyTextFont.copyWith(
+                              fontWeight: FontWeight.w400),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            context.read<PageBloc>().add(GoToRegistrationPage(RegistrationData()));
+                          },
+                          child: Text(
+                            " Daftar Sekarang",
+                            style: purpleTextFont,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            )),
       ),
     );
   }

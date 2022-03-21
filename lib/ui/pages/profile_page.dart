@@ -28,11 +28,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         User user = userState.user;
 
                         if (imageFileToUpload != null) {
-                          uploadImage(imageFileToUpload).then((downloadURL) {
+                          uploadImage(imageFileToUpload).then((url) {
                             imageFileToUpload = null;
                             context
                                 .watch<UserBloc>()
-                                .add(UpdateData(profilePicture: downloadURL));
+                                .add(UpdateData(profilePicture: url));
                           });
                         }
 

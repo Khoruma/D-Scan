@@ -7,14 +7,12 @@ Future<File> getImage() async {
 }
 
 Future<String> uploadImage(File image) async {
-    FirebaseStorage storage = FirebaseStorage.instance;
-    String fileName = basename(image.path);
-    Reference ref = storage.ref().child('Profile Picture/$fileName');
-    UploadTask uploadTask = ref.putFile(image);
-    uploadTask.then((res) {
-      res.ref.getDownloadURL();
-    });
-    return null;
+  FirebaseStorage storage = FirebaseStorage.instance;
+  String fileName = basename(image.path);
+  Reference ref = storage.ref().child('Profile Picture/$fileName');
+  UploadTask uploadTask = ref.putFile(image);
+  String url = await (await uploadTask).ref.getDownloadURL();
+  return url;
 }
 
 Widget generateDashedDivider(double width) {
